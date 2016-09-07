@@ -46,13 +46,35 @@ function drawPaddle2(paddle2X, paddle2Y){
     ctx.closePath();
 }
 
+function drawBall(){
+    requestAnimationFrame(drawBall);
+    ctxBall.save();
+    ctxBall.clearRect(0, 0, 600, 930);
+    ctxBall.restore();
+    ctxBall.beginPath();
+    ctxBall.fillStyle="#000000";
+    ctxBall.arc(ballX,ballY,16,0,Math.PI*2,true); 
+    ctxBall.closePath();
+    ctxBall.fill();
+    ballX = ballX+5;
+    ballY = ballY+5;
+}
+
 var c = document.getElementById("outerCan");
 var ctx = c.getContext("2d");
+var ball = document.getElementById("ballCan");
+var ctxBall = ball.getContext("2d");
 var padLX = 250;
 var padLY = 780;
 var padRX = 310;
 var padRY = 780;
-drawCanvas(250, 780, 310, 780);
+var ballX = 100;
+var ballY = 100;
+drawBall();
+drawCanvas(padLX, padLY, padRX, padRY);
+
+
+
 
 
 document.addEventListener('keydown', function(event) {
