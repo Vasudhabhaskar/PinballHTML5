@@ -10,31 +10,40 @@ function drawCanvas(paddle1X, paddle1Y, paddle2X, paddle2Y){
     padLY = paddle1Y;
     padRX = paddle2X;
     padRY = paddle2Y;
-    drawLine(560, 50, 560, 930, 10);
-    drawLine(510, 700, 510, 930, 10);
-    drawLine(50, 700, 50, 930, 10);
-    drawLine(50, 740, paddle1X, paddle1Y, 10);
-    drawLine(paddle2X, paddle2Y, 510, 740, 10);
+    drawLine(560, 50, 560, 930, 13);
+    drawLine(510, 700, 510, 930, 13);
+    drawLine(50, 700, 50, 930, 13);
+    ctx.closePath();
+    ctx.beginPath();
+    drawLine(50, 740, paddle1X, paddle1Y, 20);
+    drawLine(paddle2X, paddle2Y, 510, 740, 20);
+    ctx.closePath();
 };
 
 function drawPaddle1(paddle1X, paddle1Y){
     padLX = paddle1X;
     padLY = paddle1Y;
-    drawLine(560, 50, 560, 930, 10);
-    drawLine(510, 700, 510, 930, 10);
-    drawLine(50, 700, 50, 930, 10);
-    drawLine(50, 740, paddle1X, paddle1Y, 10);
-    drawLine(padRX, padRY, 510, 740, 10);
+    drawLine(560, 50, 560, 930, 13);
+    drawLine(510, 700, 510, 930, 13);
+    drawLine(50, 700, 50, 930, 13);
+    ctx.closePath();
+    ctx.beginPath();
+    drawLine(50, 740, paddle1X, paddle1Y, 20);
+    drawLine(padRX, padRY, 510, 740, 20);
+    ctx.closePath();
 }
 
 function drawPaddle2(paddle2X, paddle2Y){
     padRX = paddle2X;
     padRY = paddle2Y;
-    drawLine(560, 50, 560, 930, 10);
-    drawLine(510, 700, 510, 930, 10);
-    drawLine(50, 700, 50, 930, 10);
-    drawLine(50, 740, padLX, padLY, 10);
-    drawLine(paddle2X, paddle2Y, 510, 740, 10);
+    drawLine(560, 50, 560, 930, 13);
+    drawLine(510, 700, 510, 930, 13);
+    drawLine(50, 700, 50, 930, 13);
+    ctx.closePath();
+    ctx.beginPath();
+    drawLine(50, 740, padLX, padLY, 20);
+    drawLine(paddle2X, paddle2Y, 510, 740, 20);
+    ctx.closePath();
 }
 
 var c = document.getElementById("outerCan");
@@ -54,7 +63,7 @@ document.addEventListener('keydown', function(event) {
         ctx.clearRect(0, 0, 600, 930);
         ctx.restore();
         ctx.beginPath();
-        drawPaddle1(270, 740);
+        drawPaddle1(270, 700);
     }
     //right
     else if((event.keyCode || event.which) == 191) {
@@ -62,7 +71,7 @@ document.addEventListener('keydown', function(event) {
         ctx.clearRect(0, 0, 600, 930);
         ctx.restore();
         ctx.beginPath();
-        drawPaddle2(290, 740);
+        drawPaddle2(290, 700);
     }
     
 });
