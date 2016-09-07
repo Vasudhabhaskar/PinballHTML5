@@ -47,7 +47,7 @@ function drawPaddle2(paddle2X, paddle2Y){
 }
 
 function drawBall(){
-    requestAnimationFrame(drawBall);
+    requestId = requestAnimationFrame(drawBall);
     ctxBall.save();
     ctxBall.clearRect(0, 0, 600, 930);
     ctxBall.restore();
@@ -56,18 +56,56 @@ function drawBall(){
     
     ctxBall.beginPath();
     ctxBall.fillStyle="#000000";
-    ctxBall.arc(ballX,ballY,16,0,Math.PI*2,true); 
+    ctxBall.arc(ballX,ballY,12,0,Math.PI*2,true); 
     ctxBall.closePath();
     ctxBall.fill();
 
     if(ballX > 550 || ballX < 0){
         angle = 180 - angle;
-        updateBall();
+        updateBall();    
     }
-    if(ballY > 830 || ballY < 0){
+    else if(ballY > 900 || ballY < 0){
         angle = 360 - angle;
         updateBall();
     }
+    else if(ballX < 60  && ballY > 690 && ballY < 780){
+        angle = 180 - angle;
+        updateBall();
+    }
+    else if(ballX > 500  && ballY > 690 && ballY < 780){
+        angle = 180 - angle;
+        updateBall();
+    }
+
+    
+    if(ballX < 50 && ballY > 700){
+        cancelAnimationFrame(requestId);
+        ballX = 100;
+        ballY = 100;
+        drawBall();
+    }
+
+    if(ballX > 500 && ballY > 700){
+        cancelAnimationFrame(requestId);
+        ballX = 100;
+        ballY = 100;
+        drawBall();
+    }
+
+    if((ballX < padLCX && ballY > padLCY) || 
+        (ballX > padLX && ballY > padLY) || 
+        (ballX < padLX && ballY > padLY)){
+        angle = 360 - angle;
+        updateBall();
+    }
+
+    if((ballX > padRCX && ballY > padRCY) || 
+        (ballX < padRCX && ballY > padRCY) || 
+        (ballX > padRX && ballY > padLY)){
+        angle = 360 - angle;
+        updateBall();
+    }
+  
 }
 
 function updateBall() {
@@ -84,12 +122,17 @@ var padLX = 250;
 var padLY = 780;
 var padRX = 310;
 var padRY = 780;
-var ballX = 100;
-var ballY = 100;
+var padLCX = 50;
+var padLCY = 740;
+var padRCX = 510;
+var padRCY = 740;
+var ballX = 200;
+var ballY = 200;
 var speed = 5;
 var xunits = 0;
 var yunits = 0;
 var angle = 35;
+var requestId;
 updateBall();
 drawBall();
 drawCanvas(padLX, padLY, padRX, padRY);
