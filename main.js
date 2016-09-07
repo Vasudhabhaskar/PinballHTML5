@@ -51,13 +51,29 @@ function drawBall(){
     ctxBall.save();
     ctxBall.clearRect(0, 0, 600, 930);
     ctxBall.restore();
+    ballX += xunits;
+    ballY += yunits;
+    
     ctxBall.beginPath();
     ctxBall.fillStyle="#000000";
     ctxBall.arc(ballX,ballY,16,0,Math.PI*2,true); 
     ctxBall.closePath();
     ctxBall.fill();
-    ballX = ballX+5;
-    ballY = ballY+5;
+
+    if(ballX > 550 || ballX < 0){
+        angle = 180 - angle;
+        updateBall();
+    }
+    if(ballY > 830 || ballY < 0){
+        angle = 360 - angle;
+        updateBall();
+    }
+}
+
+function updateBall() {
+    radians = angle * Math.PI/ 180;
+    xunits = Math.cos(radians) * speed;
+    yunits = Math.sin(radians) * speed;
 }
 
 var c = document.getElementById("outerCan");
@@ -70,6 +86,11 @@ var padRX = 310;
 var padRY = 780;
 var ballX = 100;
 var ballY = 100;
+var speed = 5;
+var xunits = 0;
+var yunits = 0;
+var angle = 35;
+updateBall();
 drawBall();
 drawCanvas(padLX, padLY, padRX, padRY);
 
